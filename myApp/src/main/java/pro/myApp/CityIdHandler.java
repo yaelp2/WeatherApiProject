@@ -43,24 +43,6 @@ public class CityIdHandler {
 		
 	}
 	
-//	public long findCityId(String country, String city) {
-//		long id = -1;
-//		for(int i=0; i<jsonArr.size(); ++i) {
-//	
-//			org.json.simple.JSONObject json = (org.json.simple.JSONObject) jsonArr.get(i);
-//			if(json.get("country").toString().toLowerCase().equals(country.toLowerCase()) && json.get("name").toString().toLowerCase().equals(city.toLowerCase())){
-//				id = (long)json.get("id");
-//				break;
-//			}
-//		
-//			
-//		}
-//		return id;
-//			
-//
-//
-//	}
-	
 	
 	public long findCityId(String country, String city) {
 		String key = country.toLowerCase()+city.toLowerCase();
