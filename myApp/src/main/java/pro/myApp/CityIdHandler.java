@@ -1,31 +1,32 @@
 package pro.myApp;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import io.vertx.core.Vertx;
+
 public class CityIdHandler {
 	private org.json.simple.JSONArray jsonArr; 
+	Vertx vertx = Vertx.vertx();
 	
 	
 	public CityIdHandler() {
 		JSONParser parser = new JSONParser();
-		try {
-			jsonArr = (JSONArray) parser.parse(new FileReader("C:\\Users\\pesso\\eclipse-workspace\\myApp\\src\\main\\java\\pro\\myApp\\cities.json"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		vertx.fileSystem().readFile("target/cities.json", result -> {
+			if(result.succeeded()) {
+				try {
+					jsonArr = (JSONArray) parser.parse(result.result().toString());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else {
+				System.out.println(result.cause());
+			}
+		});
+		
 	}
 	
 	public long findCityId(String country, String city) {
