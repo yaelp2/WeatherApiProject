@@ -13,7 +13,7 @@ public class CityIdHandler {
 	
 	public CityIdHandler() {
 		JSONParser parser = new JSONParser();
-		vertx.fileSystem().readFile("target/cities.json", result -> {
+		vertx.fileSystem().readFile("src/main/resources/cities.json", result -> {
 			if(result.succeeded()) {
 				try {
 					jsonArr = (JSONArray) parser.parse(result.result().toString());
